@@ -1,25 +1,24 @@
 package tui
 
 import (
-	"fmt"
+	"strings"
 )
 
-func (m model) View() string {
-	s := "What should we do?\n\n"
+func (m Model) View() string {
+	s := strings.Builder{}
 
-	for i, choice := range m.choices {
-		cursor := " "
-		if m.cursor == i {
-			cursor = ">"
-		}
-		checked := " "
-		if _, ok := m.selected[i]; ok {
-			checked = "X"
-		}
+	s.WriteString("What should we do?\n\n")
 
-		s += fmt.Sprintf("%s [%s] %s\n", cursor, checked, choice)
+	for i := range m.Choices {
+		if m.Cursor == i {
+			s.WriteString("(*) ")
+		} else {
+			s.WriteString("( ) ")
+		}
+		s.WriteString(m.Choices[i])
+		s.WriteString("\n")
 	}
 
-	s += "\nPress q to quit.\n"
-	return s
+	s.WriteString("\nPress q to quit.\n")
+	return s.String()
 }

@@ -1,8 +1,8 @@
 package tui
 
-func InitialModel() model {
-	return model{
-		choices:  []string{"Type", "Configure"},
-		selected: make(map[int]struct{}),
+func InitialModel() Model {
+	return Model{
+		Choices:  []string{"Type", "Configure"},
+		Selected: make(map[int]struct{}),
 	}
 }
